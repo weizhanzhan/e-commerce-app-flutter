@@ -10,8 +10,13 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+        title:Text('sdsd')
+      ),
+      body:Container(
        child: Text('AccountPage'),
+    )
     );
   }
 }
