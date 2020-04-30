@@ -5,6 +5,7 @@ import 'package:flutter_demo_list/pages/find/index.dart';
 import 'package:flutter_demo_list/pages/home/index.dart';
 import 'package:flutter_demo_list/pages/shop_cart/index.dart';
 import 'package:flutter_demo_list/provider/nav_provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 
@@ -36,6 +37,8 @@ class _LayoutState extends State<Layout> {
   ];
   @override
   Widget build(BuildContext context) {
+      ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: true);
+
       return Scaffold(
       body:Consumer<BottomNavProvider>(
         builder: (_,mProvier,__)=>IndexedStack(
