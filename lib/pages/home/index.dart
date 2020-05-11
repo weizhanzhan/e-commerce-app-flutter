@@ -314,13 +314,13 @@ class MenuBox extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
                     color: item['color'],
                   ),
-                  width: ScreenUtil().setWidth(80), 
-                  height:ScreenUtil().setWidth(80),
+                  width: ScreenUtil().setWidth(100), 
+                  height:ScreenUtil().setWidth(100),
                   margin: EdgeInsets.only(bottom:10.0),
                   alignment: Alignment.center,
-                  child: Text('${item['sub']}',style: TextStyle(color:Colors.white,fontSize: ScreenUtil().setSp(20)),)
+                  child: Text('${item['sub']}',style: TextStyle(color:Colors.white,fontSize: ScreenUtil().setSp(24)),)
                 ),
-                Text('${item['label']}',style: TextStyle(fontSize: ScreenUtil().setSp(20)),)
+                Text('${item['label']}',style: TextStyle(fontSize: ScreenUtil().setSp(22),color: Colors.grey),)
               ]
             )
           );
@@ -379,7 +379,8 @@ class HeaderSwiper extends StatelessWidget {
                 );
               },
               itemCount: 3,
-              // pagination: new SwiperPagination(),
+              indicatorLayout: ,
+              pagination: (),
               // control: new SwiperControl(),
             ),
           ),
