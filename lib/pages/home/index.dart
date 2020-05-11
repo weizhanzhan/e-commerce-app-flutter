@@ -38,6 +38,7 @@ class Recommend extends StatefulWidget {
 
 class _RecommendState extends State<Recommend> with SingleTickerProviderStateMixin {
   TabController _tabController;
+ 
 
   @override
   void initState() {
@@ -54,23 +55,38 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 300,
       child: Column(
-        
         children: <Widget>[
-          TabBar(
-            labelColor: Colors.grey,
-            tabs: <Widget>[
-              Tab(text: "热门",),
-              Tab(text: "推荐"),
-              Tab(text: "关注"),
-              Tab(text: "收藏"),
-              Tab(text: "新增"),
-              Tab(text: "点赞"),
-            ],
-            controller: _tabController,  // 记得要带上tabController
+          Container(
+            child: TabBar(
+              isScrollable: true,
+              labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32)),
+              labelColor: Colors.grey,
+              tabs: <Widget>[
+                Tab(text: "热门",),
+                Tab(text: "推荐"),
+                Tab(text: "关注"),
+                Tab(text: "收藏"),
+                Tab(text: "新增"),
+                Tab(text: "点赞"),
+              ],
+              controller: _tabController,  // 记得要带上tabController
+            ), 
           ),
-         
-
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Text('11'),
+                Text('11'),
+                Text('11'),
+                Text('11'),
+                Text('11'),
+                Text('11')
+              ]
+            ),
+          )
         ],
       )
     );
@@ -363,8 +379,8 @@ class HeaderSwiper extends StatelessWidget {
                 );
               },
               itemCount: 3,
-              pagination: new SwiperPagination(),
-              control: new SwiperControl(),
+              // pagination: new SwiperPagination(),
+              // control: new SwiperControl(),
             ),
           ),
           )
@@ -438,12 +454,21 @@ class TextFileWidget extends StatelessWidget {
         // contentPadding: EdgeInsets.all(2),
         fillColor: Colors.white,
         border: InputBorder.none,
-        icon: Icon(Icons.search),
-        suffixIcon: GestureDetector(
-          onTap: () {},
-          child: Icon(Icons.camera_alt),
+        icon: GestureDetector(
+          onTap: () {
+            print('搜索');
+          },
+          child:  Icon(Icons.search,size: ScreenUtil().setSp(36),),
         ),
-        hintText: "Video name",
+        
+        
+        suffixIcon: GestureDetector(
+          onTap: () {
+            print('相机');
+          },
+          child: Icon(Icons.camera_alt,size: ScreenUtil().setSp(36),),
+        ),
+        hintText: "家居/数码/美食",
         hintStyle: new TextStyle(fontSize: ScreenUtil().setSp(24), color: Colors.black)),
       style: new TextStyle(fontSize: ScreenUtil().setSp(24), color: Colors.black,),
     );
