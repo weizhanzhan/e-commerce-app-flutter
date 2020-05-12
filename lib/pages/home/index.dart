@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_list/utils/tool.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           elevation: 0.0,
           title: Text('京西'),
-          backgroundColor: Colors.red,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -43,7 +47,7 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this,length: 6);
+    _tabController = TabController(vsync: this,length: 5);
   }
 
   @override
@@ -54,23 +58,34 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+
+    const models = [
+      { 'title':'精选','sub-title':'为你推荐'},
+      { 'title':'欢度十一','sub-title':'爆款巡礼'},
+      { 'title':'超市','sub-title':'百货生鲜'},
+      { 'title':'电器','sub-title':'3C家电'},
+      { 'title':'生活','sub-title':'居家日用'},
+    ];
+
     return Container(
-      height: 300,
+      height: 1000,
       child: Column(
         children: <Widget>[
           Container(
             child: TabBar(
               isScrollable: true,
+              indicatorColor: Theme.of(context).primaryColor ,
+              indicatorPadding: EdgeInsets.only(left:ScreenUtil().setWidth(60),right:ScreenUtil().setWidth(60)),
               labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32)),
               labelColor: Colors.grey,
-              tabs: <Widget>[
-                Tab(text: "热门",),
-                Tab(text: "推荐"),
-                Tab(text: "关注"),
-                Tab(text: "收藏"),
-                Tab(text: "新增"),
-                Tab(text: "点赞"),
-              ],
+              tabs: models.map((item){
+                return Tab(child: Column(
+                  children: <Widget>[
+                    Text('${item['title']}',style: TextStyle(fontSize: ScreenUtil().setSp(32),color: Color.fromRGBO(19, 18, 18, 1)),),
+                    Text('${item['sub-title']}',style: TextStyle(fontSize: ScreenUtil().setSp(24),color: Color.fromRGBO(144, 144, 144, 1)),)
+                  ])
+                );
+              }).toList(),
               controller: _tabController,  // 记得要带上tabController
             ), 
           ),
@@ -78,8 +93,25 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
             child: TabBarView(
               controller: _tabController,
               children: [
-                Text('11'),
-                Text('11'),
+                Container(
+                  child: new StaggeredGridView.countBuilder(
+                    physics:NeverScrollableScrollPhysics(),
+                    crossAxisCount: 4,
+                    itemCount: 8,
+                    itemBuilder: (BuildContext context, int index) => new Container(
+                        color: Colors.green,
+                        child: new Center(
+                          child: new CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: new Text('$index'),
+                          ),
+                        )),
+                    staggeredTileBuilder: (int index) =>
+                        new StaggeredTile.count(2, index%2==1 ? 2.5 : 2),
+                    mainAxisSpacing: 4.0,
+                    crossAxisSpacing: 4.0,
+                  ),
+                ),
                 Text('11'),
                 Text('11'),
                 Text('11'),
@@ -141,7 +173,33 @@ class SeckillCategory extends StatelessWidget {
   }
 }
 //秒杀
-class Seckill extends StatelessWidget {
+
+class Seckill extends StatefulWidget {
+  @override
+  _SeckillState createState() => _SeckillState();
+}
+
+class _SeckillState extends State<Seckill> {
+
+  String times = '00:00:00';
+  void timeFunc(){
+    const period = const Duration(seconds: 1);
+    Timer.periodic(period, (timer) {
+      var now = new DateTime.now();
+   
+      setState(() {
+      
+        times = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
+      });
+    });
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    timeFunc();
+    
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -180,7 +238,7 @@ class Seckill extends StatelessWidget {
                           ),
                           Container(
                              padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-                             child: Text('01:40:41', style:TextStyle(
+                             child: Text(times, style:TextStyle(
                                 fontSize: ScreenUtil().setSp(24),
                                 color: Color.fromRGBO(247, 49, 24, 1),
                                 height: 1.3
@@ -235,6 +293,113 @@ class Seckill extends StatelessWidget {
     );
   }
 }
+//class Seckill extends StatelessWidget {
+//   void timeFunc(){
+//     const period = const Duration(seconds: 1);
+//     Timer.periodic(period, (timer) {
+//     print(DateTime.now());
+//      });
+//   }
+
+//   @override
+//   void initState() { 
+//     super.initState();
+//     timeFunc();
+    
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: EdgeInsets.all(10.0),
+//       color: Colors.white,
+//       child: Row(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         children:[
+//           Expanded(
+//             flex: 4,
+//             child:Column(
+//               children: <Widget>[
+//                 Row(
+//                   children: <Widget>[
+//                     Text('京西秒杀',style: TextStyle(
+//                       fontSize: ScreenUtil().setSp(32)
+//                     ),),
+//                     Container(
+//                       margin: EdgeInsets.only(left:ScreenUtil().setWidth(10)),
+//                       decoration: BoxDecoration(
+//                         borderRadius: BorderRadius.all(Radius.circular(4.0)),
+//                         //设置四周边框
+//                         border: new Border.all(width: 1, color: Colors.red),
+//                       ),
+//                       child: Row(
+//                          crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: <Widget>[
+//                           Container(
+//                             padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+//                             color: Color.fromRGBO(247, 49, 24, 1),
+//                             child: Text('8点场', style:TextStyle(
+//                               fontSize: ScreenUtil().setSp(24),
+//                               color: Colors.white
+//                             )),
+//                           ),
+//                           Container(
+//                              padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+//                              child: Text('01:40:41', style:TextStyle(
+//                                 fontSize: ScreenUtil().setSp(24),
+//                                 color: Color.fromRGBO(247, 49, 24, 1),
+//                                 height: 1.3
+//                               )), 
+//                           )
+//                         ],
+//                       ),
+//                     )
+//                   ],
+//                 ),
+//                 Container(
+//                   padding: EdgeInsets.only(right:10),
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: <Widget>[
+//                       SeckillItem(),
+//                       SeckillItem(),
+//                       SeckillItem()
+//                     ],
+//                   ),
+//                 )
+//               ],
+//             )
+//           ),
+//            Expanded(
+//             flex: 3,
+//             child:Container(
+//               padding: EdgeInsets.only(left:ScreenUtil().setWidth(2)),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: <Widget>[
+//                   Text('发现好货',style: TextStyle(
+//                      fontSize: ScreenUtil().setSp(32)
+//                   ),),
+//                   Text('品质新生活',style: TextStyle(
+//                      fontSize: ScreenUtil().setSp(24),
+//                      color: Color.fromRGBO(65, 225, 137, 1)
+//                   ),),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                     children: <Widget>[
+//                        Image.network('https://free.modao.cc/uploads4/images/3984/39841665/v2_pyhhbc.png',width: ScreenUtil().setWidth(150),),
+//                        Image.network('https://free.modao.cc/uploads4/images/3984/39841665/v2_pyhhbc.png',width: ScreenUtil().setWidth(150),),
+//                     ],
+//                   )
+//                 ],
+//               ),
+//             )
+//           )
+//         ]
+//       ),
+//     );
+//   }
+// }
 //单个秒杀项目
 class SeckillItem extends StatelessWidget {
   const SeckillItem({
@@ -379,8 +544,8 @@ class HeaderSwiper extends StatelessWidget {
                 );
               },
               itemCount: 3,
-              indicatorLayout: ,
-              pagination: (),
+              // indicatorLayout: ,
+              // pagination: (),
               // control: new SwiperControl(),
             ),
           ),
@@ -407,7 +572,7 @@ class HeaderBg extends StatelessWidget {
       child: Container(
         height: ScreenUtil().setHeight(220),
         width: width,
-        color: Colors.red,
+        color: Theme.of(context).primaryColor,
       )
     );
   }
