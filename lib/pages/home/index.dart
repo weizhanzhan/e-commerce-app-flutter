@@ -82,7 +82,7 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
                 return Tab(child: Column(
                   children: <Widget>[
                     Text('${item['title']}',style: TextStyle(fontSize: ScreenUtil().setSp(32),color: Color.fromRGBO(19, 18, 18, 1)),),
-                    Text('${item['sub-title']}',style: TextStyle(fontSize: ScreenUtil().setSp(24),color: Color.fromRGBO(144, 144, 144, 1)),)
+                    Text('${item['sub-title']}',style: TextStyle(fontSize: ScreenUtil().setSp(24),color: $theme.grey1),)
                   ])
                 );
               }).toList(),
@@ -293,113 +293,7 @@ class _SeckillState extends State<Seckill> {
     );
   }
 }
-//class Seckill extends StatelessWidget {
-//   void timeFunc(){
-//     const period = const Duration(seconds: 1);
-//     Timer.periodic(period, (timer) {
-//     print(DateTime.now());
-//      });
-//   }
 
-//   @override
-//   void initState() { 
-//     super.initState();
-//     timeFunc();
-    
-//   }
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: EdgeInsets.all(10.0),
-//       color: Colors.white,
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         children:[
-//           Expanded(
-//             flex: 4,
-//             child:Column(
-//               children: <Widget>[
-//                 Row(
-//                   children: <Widget>[
-//                     Text('京西秒杀',style: TextStyle(
-//                       fontSize: ScreenUtil().setSp(32)
-//                     ),),
-//                     Container(
-//                       margin: EdgeInsets.only(left:ScreenUtil().setWidth(10)),
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.all(Radius.circular(4.0)),
-//                         //设置四周边框
-//                         border: new Border.all(width: 1, color: Colors.red),
-//                       ),
-//                       child: Row(
-//                          crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: <Widget>[
-//                           Container(
-//                             padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-//                             color: Color.fromRGBO(247, 49, 24, 1),
-//                             child: Text('8点场', style:TextStyle(
-//                               fontSize: ScreenUtil().setSp(24),
-//                               color: Colors.white
-//                             )),
-//                           ),
-//                           Container(
-//                              padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-//                              child: Text('01:40:41', style:TextStyle(
-//                                 fontSize: ScreenUtil().setSp(24),
-//                                 color: Color.fromRGBO(247, 49, 24, 1),
-//                                 height: 1.3
-//                               )), 
-//                           )
-//                         ],
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//                 Container(
-//                   padding: EdgeInsets.only(right:10),
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: <Widget>[
-//                       SeckillItem(),
-//                       SeckillItem(),
-//                       SeckillItem()
-//                     ],
-//                   ),
-//                 )
-//               ],
-//             )
-//           ),
-//            Expanded(
-//             flex: 3,
-//             child:Container(
-//               padding: EdgeInsets.only(left:ScreenUtil().setWidth(2)),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   Text('发现好货',style: TextStyle(
-//                      fontSize: ScreenUtil().setSp(32)
-//                   ),),
-//                   Text('品质新生活',style: TextStyle(
-//                      fontSize: ScreenUtil().setSp(24),
-//                      color: Color.fromRGBO(65, 225, 137, 1)
-//                   ),),
-//                   Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                     children: <Widget>[
-//                        Image.network('https://free.modao.cc/uploads4/images/3984/39841665/v2_pyhhbc.png',width: ScreenUtil().setWidth(150),),
-//                        Image.network('https://free.modao.cc/uploads4/images/3984/39841665/v2_pyhhbc.png',width: ScreenUtil().setWidth(150),),
-//                     ],
-//                   )
-//                 ],
-//               ),
-//             )
-//           )
-//         ]
-//       ),
-//     );
-//   }
-// }
 //单个秒杀项目
 class SeckillItem extends StatelessWidget {
   const SeckillItem({

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color.fromRGBO(201, 37, 25, 1)
       ),
       home: Layout(),
+      
       builder: (BuildContext cxt,Widget w){
         ScreenUtil.init(cxt, width: 750, height: 1334, allowFontScaling: true);
         return w;
