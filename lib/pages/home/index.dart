@@ -66,9 +66,11 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
       { 'title':'电器','sub-title':'3C家电'},
       { 'title':'生活','sub-title':'居家日用'},
     ];
-
+    var length = ScreenUtil.screenWidth* (3/5) ;
+    var count = 20;
+    var listCount = (count/2).roundToDouble();
     return Container(
-      height: 1000,
+       height:  (listCount/2).roundToDouble() * length,
       child: Column(
         children: <Widget>[
           Container(
@@ -94,10 +96,11 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
               controller: _tabController,
               children: [
                 Container(
+                  
                   child: new StaggeredGridView.countBuilder(
                     physics:NeverScrollableScrollPhysics(),
                     crossAxisCount: 4,
-                    itemCount: 8,
+                    itemCount: count,
                     itemBuilder: (BuildContext context, int index) => new Container(
                         color: Colors.green,
                         child: new Center(
