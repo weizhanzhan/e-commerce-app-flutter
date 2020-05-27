@@ -75,6 +75,7 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
         children: <Widget>[
           Container(
             child: TabBar(
+              
               isScrollable: true,
               indicatorColor: Theme.of(context).primaryColor ,
               indicatorPadding: EdgeInsets.only(left:ScreenUtil().setWidth(60),right:ScreenUtil().setWidth(60)),
@@ -96,21 +97,55 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
               controller: _tabController,
               children: [
                 Container(
-                  
+                  color: Colors.transparent,
                   child: new StaggeredGridView.countBuilder(
                     physics:NeverScrollableScrollPhysics(),
                     crossAxisCount: 4,
                     itemCount: count,
                     itemBuilder: (BuildContext context, int index) => new Container(
-                        color: Colors.green,
+                      color: Colors.white,
                         child: new Center(
-                          child: new CircleAvatar(
-                            backgroundColor: Colors.white,
-                            child: new Text('$index'),
-                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Image.network('https://free.modao.cc/uploads4/images/3984/39841665/v2_pyhhbc.png',width: ScreenUtil().setWidth(360),),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(10.0, 0, 10, 0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+                                      height: $.setHeight(50),
+                                      color: Color.fromRGBO(237, 65, 51, 100),
+                                      child: Center(
+                                        child: Text('京西物流',style: TextStyle(
+                                       color: Colors.white,
+                                      //  height: 1.4,
+                                       fontSize: $.setSp(24)
+                                      )),
+                                      )
+                                    ),
+                                    Text('Apple 2019款',style: TextStyle(
+                                     fontSize: $.setSp(28) 
+                                    ),)
+                                  ],
+                                ), 
+                              ),
+                              Container(
+                               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                               child: Text('Macbook Pro 13.3苹果笔记本电脑',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                   fontSize:  $.setSp(28) 
+                                  ),
+                                ), 
+                              )
+                            ],
+                          )
                         )),
                     staggeredTileBuilder: (int index) =>
-                        new StaggeredTile.count(2, index%2==1 ? 2.5 : 2),
+                        new StaggeredTile.count(2, index%2==1 ? 3.5 : 3),
                     mainAxisSpacing: 4.0,
                     crossAxisSpacing: 4.0,
                   ),
