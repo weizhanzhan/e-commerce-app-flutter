@@ -66,8 +66,8 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
       { 'title':'电器','sub-title':'3C家电'},
       { 'title':'生活','sub-title':'居家日用'},
     ];
-    var length = ScreenUtil.screenWidth* (3/5) ;
-    var count = 20;
+    var length = ScreenUtil.screenWidth / 2 * (3.2/2) ;
+    var count = 10;
     var listCount = (count/2).roundToDouble();
     return Container(
        height:  (listCount/2).roundToDouble() * length,
@@ -106,6 +106,8 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
                       color: Colors.white,
                         child: new Center(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Image.network('https://free.modao.cc/uploads4/images/3984/39841665/v2_pyhhbc.png',width: ScreenUtil().setWidth(360),),
                               Container(
@@ -140,12 +142,58 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
                                    fontSize:  $.setSp(28) 
                                   ),
                                 ), 
+                              ),
+                              Container(
+                                 padding: EdgeInsets.fromLTRB(10, 15, 10, 0),
+                                  child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                 children: <Widget>[
+                                   Row(
+                                    children: <Widget>[
+                                      Text('￥8999.00',style: TextStyle(
+                                        fontSize: $.setSp(28),
+                                        color: Theme.of(context).primaryColor
+                                      ),),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Theme.of(context).primaryColor, width: 1.0),
+                                        ), 
+                                        child: Text('满减',style: TextStyle(
+                                        color: Theme.of(context).primaryColor ,
+                                        fontSize: $.setSp(24)
+                                        ),),
+                                      )
+                                    ]),
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                      decoration: BoxDecoration(
+                                       border: Border.all(color: $theme.grey1,width: 1.0),
+                                       borderRadius: BorderRadius.all(Radius.circular(10)) 
+                                      ),
+                                      child: Text('看相似',style: TextStyle(fontSize: $.setSp(24)),),  
+                                    )
+                                 ], 
+                                ),
+                              )
+                              ,
+                              index%2==1 ? Container(
+                                padding: EdgeInsets.only(left:10,top: 10),
+                                child:Row(
+                                 children: <Widget>[
+                                   Icon(Icons.hot_tub,size: 16,color: Colors.red,),
+                                   Text('电子热卖榜第2名',style: TextStyle(
+                                    fontSize: $.setSp(24) 
+                                   ),)
+                                 ], 
+                                ),
+                              ) : Container(
+                                height: 0,
                               )
                             ],
                           )
                         )),
                     staggeredTileBuilder: (int index) =>
-                        new StaggeredTile.count(2, index%2==1 ? 3.5 : 3),
+                        new StaggeredTile.count(2, index%2==1 ? 3.1 : 2.9),
                     mainAxisSpacing: 4.0,
                     crossAxisSpacing: 4.0,
                   ),
