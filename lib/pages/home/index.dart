@@ -590,7 +590,6 @@ class InputSearch extends StatelessWidget {
 class TextFileWidget extends StatelessWidget {
 
   Widget buildTextField() {
-    print(ScreenUtil().setHeight(13));
     //theme设置局部主题
     return TextField(
       cursorColor: Colors.red, //设置光标
