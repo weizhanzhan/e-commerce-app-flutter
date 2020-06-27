@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_demo_list/provider/nav_provider.dart';
+import 'package:flutter_demo_list/utils/device_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'components/Layout.dart/index.dart';
-void main() => runApp(ChangeNotifierProvider.value(
-  value: BottomNavProvider(),
-  child: MyApp()
-  )
-);
+void main() {
+  runApp(ChangeNotifierProvider.value(
+    value: BottomNavProvider(),
+    child: MyApp()
+    )
+  );
+   // 透明状态栏
+  if (Device.isAndroid) {
+    final SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

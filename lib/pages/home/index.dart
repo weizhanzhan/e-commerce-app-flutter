@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_list/components/WTab.dart';
 import 'package:flutter_demo_list/utils/tool.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -73,20 +74,27 @@ class _RecommendState extends State<Recommend> with SingleTickerProviderStateMix
        height:  (listCount/2).roundToDouble() * length,
       child: Column(
         children: <Widget>[
+        
           Container(
+            height: $.setWidth(120),
             child: TabBar(
-              
+
               isScrollable: true,
               indicatorColor: Theme.of(context).primaryColor ,
               indicatorPadding: EdgeInsets.only(left:ScreenUtil().setWidth(60),right:ScreenUtil().setWidth(60)),
               labelStyle: TextStyle(fontSize: ScreenUtil().setSp(32)),
               labelColor: Colors.grey,
               tabs: models.map((item){
-                return Tab(child: Column(
+                return WTab(
+                  theight: $.setWidth(100),
+
+                  child: Container(
+                  child: Column(
                   children: <Widget>[
                     Text('${item['title']}',style: TextStyle(fontSize: ScreenUtil().setSp(32),color: Color.fromRGBO(19, 18, 18, 1)),),
                     Text('${item['sub-title']}',style: TextStyle(fontSize: ScreenUtil().setSp(24),color: $theme.grey1),)
-                  ])
+                  ]),
+                )
                 );
               }).toList(),
               controller: _tabController,  // 记得要带上tabController
@@ -641,3 +649,5 @@ class TextFileWidget extends StatelessWidget {
     return editView();
   }
 }
+
+
