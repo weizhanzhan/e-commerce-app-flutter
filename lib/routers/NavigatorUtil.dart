@@ -9,4 +9,17 @@ class NavigatorUtil {
     /// replace：true 就是将 splash 页面给移除掉了，这点后退键的时候就不会再出现Splash页面
     Application.router.navigateTo(context, Routes.search, replace: true);
   }
+
+  /// 返回
+  static void goBack(BuildContext context) {
+    unfocus();
+    Navigator.pop(context);
+  }
+
+  static void unfocus() {
+    // 使用下面的方式，会触发不必要的build。
+    // FocusScope.of(context).unfocus();
+    // https://github.com/flutter/flutter/issues/47128#issuecomment-627551073
+    FocusManager.instance.primaryFocus?.unfocus();
+  }
 }
