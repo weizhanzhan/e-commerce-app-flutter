@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 
 class $ {
@@ -46,3 +47,67 @@ class $theme {
 
   static Color black1 = Color.fromRGBO(16, 16, 16, 1); //黑阶1
 }
+
+class ImageUtils {
+  static ImageProvider getAssetImage(String name,
+      {ImageFormat format = ImageFormat.png}) {
+    return AssetImage(getImgPath(name, format: format));
+  }
+
+  static String getImgPath(String name,
+      {ImageFormat format = ImageFormat.png}) {
+    return 'assets/images/$name.png';
+  }
+
+  // static ImageProvider getImageProvider(String imageUrl, {String holderImg = 'none'}) {
+  //   if (TextUtil.isEmpty(imageUrl)) {
+  //     return AssetImage(getImgPath(holderImg));
+  //   }
+  //   return CachedNetworkImageProvider(imageUrl);
+  // }
+}
+
+/// 加载本地资源图片
+class LoadAssetImage extends StatelessWidget {
+  const LoadAssetImage(this.image,
+      {Key key,
+      this.width,
+      this.height,
+      this.cacheWidth,
+      this.cacheHeight,
+      this.fit,
+      this.format = ImageFormat.png,
+      this.color})
+      : super(key: key);
+
+  final String image;
+  final double width;
+  final double height;
+  final int cacheWidth;
+  final int cacheHeight;
+  final BoxFit fit;
+  final ImageFormat format;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      ImageUtils.getImgPath(image, format: format),
+      height: height,
+      width: width,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+      fit: fit,
+      color: color,
+
+      /// 忽略图片语义
+      excludeFromSemantics: true,
+    );
+  }
+}
+
+enum ImageFormat { png, jpg, gif, webp }
+
+// extension ImageFormatExtension on ImageFormat {
+//   String get value => ['png', 'jpg', 'gif', 'webp'][this.index];
+// }

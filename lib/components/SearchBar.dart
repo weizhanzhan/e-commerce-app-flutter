@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_demo_list/utils/colors.dart';
 
-import 'load_image.dart';
+import 'package:flutter_demo_list/utils/colors.dart';
+import 'package:flutter_demo_list/utils/tool.dart';
 
 /// 搜索页的AppBar
 class SearchBar extends StatefulWidget implements PreferredSizeWidget {
@@ -40,7 +38,7 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = ThemeUtils.isDark(context);
+    final bool isDark = false;
     final Color iconColor =
         isDark ? Colours.dark_text_gray : Colours.text_gray_c;
 
@@ -91,21 +89,23 @@ class _SearchBarState extends State<SearchBar> {
                 top: 0.0, left: -8.0, right: -16.0, bottom: 14.0),
             border: InputBorder.none,
             icon: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
-              child: LoadAssetImage(
-                'order/order_search',
-                color: iconColor,
-              ),
-            ),
+                padding:
+                    const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 8.0),
+                child: LoadAssetImage(
+                  'order_search',
+                  color: iconColor,
+                )),
             hintText: widget.hintText,
             suffixIcon: GestureDetector(
               child: Semantics(
                 label: '清空',
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-                  child: LoadAssetImage('order/order_delete', color: iconColor),
-                ),
+                    padding: const EdgeInsets.only(
+                        left: 16.0, top: 8.0, bottom: 8.0),
+                    child: LoadAssetImage(
+                      'order_delete',
+                      color: iconColor,
+                    )),
               ),
               onTap: () {
                 /// https://github.com/flutter/flutter/issues/35848
@@ -138,23 +138,23 @@ class _SearchBarState extends State<SearchBar> {
           _focus.unfocus();
           widget.onPressed(_controller.text);
         },
-        child: Text('搜索', style: TextStyle(fontSize: Dimens.font_sp14)),
+        child: Text('搜索', style: TextStyle(fontSize: $theme.f_14)),
       ),
     );
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
       child: Material(
-        color: ThemeUtils.getBackgroundColor(context),
+        color: Colors.red,
         child: SafeArea(
           child: Container(
             child: Row(
               children: <Widget>[
                 back,
                 textField,
-                Gaps.hGap8,
+                SizedBox(width: 8),
                 search,
-                Gaps.hGap16,
+                SizedBox(width: 16),
               ],
             ),
           ),
