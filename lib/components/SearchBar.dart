@@ -86,7 +86,7 @@ class _SearchBarState extends State<SearchBar> {
           },
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(
-                top: 0.0, left: -8.0, right: -16.0, bottom: 14.0),
+                top: 0.0, left: -8.0, right: -16.0, bottom: 11.0),
             border: InputBorder.none,
             icon: Padding(
                 padding:
